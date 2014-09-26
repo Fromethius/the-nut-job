@@ -22,6 +22,7 @@ namespace The_Nut_Job
         public Game1()
             : base()
         {
+            //Git fukt mor like.
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
