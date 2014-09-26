@@ -23,6 +23,7 @@ namespace The_Nut_Job
             : base()
         {
             //Git fukt mor like.
+            // FAK UR MOM GIB ITEN
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
