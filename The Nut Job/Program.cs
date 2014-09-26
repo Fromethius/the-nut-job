@@ -18,7 +18,7 @@ namespace The_Nut_Job
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new TheNutJobGame())
                 game.Run();
         }
     }
