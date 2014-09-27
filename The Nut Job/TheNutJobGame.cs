@@ -14,7 +14,7 @@ namespace The_Nut_Job
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private Sketcher sketcher;
-        private Ball ball = new Ball(new Vector2(200,200));//Change Vector2 based on level.
+        private Ball ball = new Ball(new Vector2(200, 0));//Change Vector2 based on level.
 
         public TheNutJobGame()
             : base()
