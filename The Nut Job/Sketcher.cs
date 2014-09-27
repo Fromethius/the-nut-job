@@ -51,7 +51,7 @@ namespace The_Nut_Job
             Vector2 edge = end - start;
 
             int distance = (int)edge.Length();
-            int lineWidth = 1;
+            int lineWidth = 5;
 
             Rectangle stretchLine = new Rectangle((int)start.X, (int)start.Y, distance, lineWidth);
             float angle = (float)Math.Atan2(edge.Y, edge.X);
