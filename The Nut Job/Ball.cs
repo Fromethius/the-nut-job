@@ -7,10 +7,10 @@ namespace The_Nut_Job
 {
     class Ball
     {
-        int Radius { get; private set; }
-        Skin BallSkin { get; private set; }
-        int XCenter { get; private set; }
-        int YCenter { get; private set; }
+        public int Radius { get; private set; }
+        public Skin BallSkin { get; private set; }
+        public int XCenter { get; private set; }
+        public int YCenter { get; private set; }
 
         public Ball()
         {
