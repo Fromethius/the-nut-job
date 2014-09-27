@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Ball.cs" />
+    <Compile Include="CollisionDetection.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Sketcher.cs" />
     <Compile Include="Skin.cs" />

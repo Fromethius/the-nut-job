@@ -10,7 +10,7 @@ namespace The_Nut_Job
     class Sketcher
     {
         private readonly Texture2D whitePixel;
-        private readonly Stack<Path> lines = new Stack<Path>();
+        public readonly Stack<Path> lines = new Stack<Path>();
 
         public Sketcher(GraphicsDevice graphicsDevice)
         {

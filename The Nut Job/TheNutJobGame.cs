@@ -55,6 +55,31 @@ namespace The_Nut_Job
                 sketcher.AddPoint(new Vector2(Input.MouseX, Input.MouseY));
             }
 
+            for (int degrees = 0; degrees < 360; degrees++)
+            {
+                float radius = ball.Image.Width / 2;
+                Vector2 origin = new Vector2(ball.Position.X + radius, ball.Position.Y + radius);
+
+                float xOffset = radius * (float)Math.Cos(degrees);
+                float yOffset = radius * (float)Math.Sin(degrees);
+
+                Vector2 circumferencePosition = new Vector2((int)(origin.X + xOffset), (int)(origin.Y + yOffset));
+
+                foreach (var path in sketcher.lines)
+                {
+                    if (path.Contains(circumferencePosition))
+                    {
+                        
+                    }
+                }
+            }
+
+            if (ball.Position.Y > 1000)
+            {
+                ball.SetInitialPosition(ball.Position.X, 0);
+                ball.SetVelocity(new Vector2(0, 10));
+            }
+
             base.Update(gameTime);
         }
 

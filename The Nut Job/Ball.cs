@@ -23,11 +23,16 @@ namespace The_Nut_Job
         public Vector2 Position { get; private set; }
         public Vector2 Velocity { get; private set; }
         public Vector2 Acceleration { get; private set; }
-        private Texture2D Image;
+        public Texture2D Image { get; private set; }
 
         public void SetInitialPosition(float x, float y)
         {
             Position = new Vector2(x, y);
+        }
+
+        public void SetVelocity(Vector2 vel)
+        {
+            Velocity = vel;
         }
 
         public void Update(GameTime gameTime)
@@ -45,11 +50,6 @@ namespace The_Nut_Job
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Image, Position, Color.White);
-        }
-
-        public void SetAcceleration(Vector2 acc)
-        {
-
         }
 
         public void SetSkin(Skin skin)
