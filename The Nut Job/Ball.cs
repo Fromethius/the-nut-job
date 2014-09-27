@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace The_Nut_Job
 {
     class Ball
     {
-        public Ball()
+        public Ball(Vector2 position)
         {
-            Position = new Vector2(50f,50f);
+            Position = new Vector2(position.X, position.Y);
             Velocity = new Vector2(0, 0);
-            Acceleration = new Vector2(0, 0);
+            Acceleration = new Vector2(0, 500);
             Radius = 25; //pixels.
             BallSkin = Skin.Default;
         }
@@ -22,20 +23,33 @@ namespace The_Nut_Job
         public Vector2 Position { get; private set; }
         public Vector2 Velocity { get; private set; }
         public Vector2 Acceleration { get; private set; }
+        private Texture2D Image;
 
-        public void SetPosition(float x, float y)
+        public void SetInitialPosition(float x, float y)
         {
             Position = new Vector2(x, y);
         }
 
-        public void SetVelocity(float velX, float velY)
+        public void Update(GameTime gameTime)
         {
-            Velocity = new Vector2(velX, velY);
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Velocity += dt * Acceleration;
+            Position += dt * Velocity;
         }
 
-        public void SetAcceleration(float accX, float accY)
+        public void LoadImage(Texture2D image)
         {
-            Acceleration = new Vector2(accX, accY);
+            Image = image;
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Image, Position, Color.White);
+        }
+
+        public void SetAcceleration(Vector2 acc)
+        {
+
         }
 
         public void SetSkin(Skin skin)

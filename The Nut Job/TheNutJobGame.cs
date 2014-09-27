@@ -14,6 +14,7 @@ namespace The_Nut_Job
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private Sketcher sketcher;
+        private Ball ball = new Ball(new Vector2(200,200));//Change Vector2 based on level.
 
         public TheNutJobGame()
             : base()
@@ -32,6 +33,7 @@ namespace The_Nut_Job
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sketcher = new Sketcher(GraphicsDevice);
+            ball.LoadImage(Content.Load<Texture2D>("ball.png"));
         }
 
         protected override void UnloadContent()
@@ -42,7 +44,8 @@ namespace The_Nut_Job
         protected override void Update(GameTime gameTime)
         {
             Input.Update();
-
+            ball.Update(gameTime);
+            
             if (Input.IsMouseLeftClick())
             {
                 sketcher.StartNewPath();
@@ -62,6 +65,8 @@ namespace The_Nut_Job
             spriteBatch.Begin();
 
             sketcher.DrawPaths(spriteBatch);
+
+            ball.Draw(spriteBatch);
 
             spriteBatch.End();
 
