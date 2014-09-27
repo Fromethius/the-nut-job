@@ -74,7 +74,7 @@ namespace The_Nut_Job
                         Vector2 previousPoint = path[collisionIndex - 1];
                         Vector2 nextPoint = path[collisionIndex + 1];
 
-
+                        Vector2 connecting = nextPoint - previousPoint;
                         Vector2 normal = new Vector2();
                         ball.Bounce();
                     }
