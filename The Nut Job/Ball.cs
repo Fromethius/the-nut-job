@@ -7,10 +7,11 @@ namespace The_Nut_Job
 {
     class Ball
     {
+        int Radius { get; private set; }
+        
         public Ball()
         {
 
         }
-        this.Ball = new this;
     }
 }
