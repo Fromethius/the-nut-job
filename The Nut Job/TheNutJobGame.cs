@@ -13,12 +13,14 @@ namespace The_Nut_Job
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+        private Sketcher sketcher;
 
         public TheNutJobGame()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
         }
 
         protected override void Initialize()
@@ -29,6 +31,7 @@ namespace The_Nut_Job
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            sketcher = new Sketcher(GraphicsDevice);
         }
 
         protected override void UnloadContent()
@@ -38,14 +41,29 @@ namespace The_Nut_Job
 
         protected override void Update(GameTime gameTime)
         {
+            Input.Update();
+
+            if (Input.IsMouseLeftClick())
+            {
+                sketcher.StartNewPath();
+            }
+            else if (Input.IsMouseLeftDown())
+            {
+                sketcher.AddPoint(new Vector2(Input.MouseX, Input.MouseY));
+            }
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            
+            spriteBatch.Begin();
+
+            sketcher.DrawPaths(spriteBatch);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
