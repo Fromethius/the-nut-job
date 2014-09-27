@@ -2,28 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace The_Nut_Job
 {
     class Ball
     {
-        public int Radius { get; private set; }
-        public Skin BallSkin { get; private set; }
-        public int XCenter { get; private set; }
-        public int YCenter { get; private set; }
-
         public Ball()
         {
-            Radius = 50; //pixels.
-            XCenter = 0;
-            YCenter = 0;
+            Position = new Vector2(50f,50f);
+            Velocity = new Vector2(0, 0);
+            Acceleration = new Vector2(0, 0);
+            Radius = 25; //pixels.
             BallSkin = Skin.Default;
         }
 
-        public void SetLocation(int x, int y)
+        public int Radius { get; private set; }
+        public Skin BallSkin { get; private set; }
+        public Vector2 Position { get; private set; }
+        public Vector2 Velocity { get; private set; }
+        public Vector2 Acceleration { get; private set; }
+
+        public void SetPosition(float x, float y)
         {
-            XCenter = x;
-            YCenter = y;
+            Position = new Vector2(x, y);
+        }
+
+        public void SetVelocity(float velX, float velY)
+        {
+            Velocity = new Vector2(velX, velY);
+        }
+
+        public void SetAcceleration(float accX, float accY)
+        {
+            Acceleration = new Vector2(accX, accY);
         }
 
         public void SetSkin(Skin skin)
