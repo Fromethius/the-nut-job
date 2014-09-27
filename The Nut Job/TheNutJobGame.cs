@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -69,7 +70,7 @@ namespace The_Nut_Job
                 {
                     if (path.Contains(circumferencePosition))
                     {
-                        
+                        Console.WriteLine("x");
                     }
                 }
             }
