@@ -39,7 +39,7 @@ namespace The_Nut_Job
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Velocity += dt * Acceleration;
-            Position += dt * Velocity;
+            Position += dt * Velocity;            
         }
 
         public void LoadImage(Texture2D image)
@@ -50,6 +50,11 @@ namespace The_Nut_Job
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Image, Position, Color.White);
+        }
+
+        public void Bounce(Vector2 normal)
+        {
+            Velocity = (2 * normal * Vector2.Dot(Velocity, normal)) + Velocity;
         }
 
         public void SetSkin(Skin skin)
