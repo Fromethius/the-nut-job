@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using Path = System.Collections.Generic.HashSet<Microsoft.Xna.Framework.Vector2>;
+using Path = System.Collections.Generic.List<Microsoft.Xna.Framework.Vector2>;
 
 namespace The_Nut_Job
 {

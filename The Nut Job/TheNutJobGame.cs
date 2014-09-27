@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -38,14 +39,14 @@ namespace The_Nut_Job
 
         protected override void UnloadContent()
         {
-            
+
         }
 
         protected override void Update(GameTime gameTime)
         {
             Input.Update();
             ball.Update(gameTime);
-            
+
             if (Input.IsMouseLeftClick())
             {
                 sketcher.StartNewPath();
@@ -69,8 +70,16 @@ namespace The_Nut_Job
                 {
                     if (path.Contains(circumferencePosition))
                     {
-                        
+                        int collisionIndex = path.IndexOf(circumferencePosition);
+                        Vector2 previousPoint = path[collisionIndex - 1];
+                        Vector2 nextPoint = path[collisionIndex + 1];
+
+
+                        Vector2 normal = new Vector2();
+                        ball.Bounce();
                     }
+
+
                 }
             }
 
