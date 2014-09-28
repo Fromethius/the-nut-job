@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using Path = System.Collections.Generic.List<Microsoft.Xna.Framework.Vector2>;
+using Path = System.Collections.Generic.List<The_Nut_Job.LinePoint>;
 
 namespace The_Nut_Job
 {
@@ -25,23 +26,30 @@ namespace The_Nut_Job
 
         public void AddPoint(Vector2 point)
         {
-            lines.Peek().Add(point);
+            LinePoint newPoint = new LinePoint();
+
+            if (lines.Peek().Count > 0)
+            {
+                LinePoint previousPoint = lines.Peek().Last();
+                previousPoint.Next = newPoint;
+                newPoint.Previous = previousPoint;
+            }
+
+            newPoint.Position = point;
+
+            lines.Peek().Add(newPoint);
         }
 
         public void DrawPaths(SpriteBatch spriteBatch)
         {
             foreach (Path line in lines)
             {
-                Vector2 previousPoint = Vector2.Zero;
-
-                foreach (Vector2 point in line)
+                foreach (LinePoint point in line)
                 {
-                    if (previousPoint != Vector2.Zero)
+                    if (point.Previous != null)
                     {
-                        DrawLine(spriteBatch, previousPoint, point);
+                        DrawLine(spriteBatch, point.Previous.Position, point.Position);
                     }
-
-                    previousPoint = point;
                 }
             }
         }

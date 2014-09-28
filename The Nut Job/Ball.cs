@@ -13,7 +13,7 @@ namespace The_Nut_Job
         {
             Position = new Vector2(position.X, position.Y);
             Velocity = new Vector2(0, 0);
-            Acceleration = new Vector2(0, 500);
+            Acceleration = new Vector2(0, 100);
             Radius = 25; //pixels.
             BallSkin = Skin.Default;
         }
@@ -38,8 +38,9 @@ namespace The_Nut_Job
         public void Update(GameTime gameTime)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Position += dt * Velocity;
             Velocity += dt * Acceleration;
-            Position += dt * Velocity;            
+                        
         }
 
         public void LoadImage(Texture2D image)
@@ -54,12 +55,24 @@ namespace The_Nut_Job
 
         public void Bounce(Vector2 normal)
         {
-            Velocity = (2 * normal * Vector2.Dot(Velocity, normal)) + Velocity;
+            Vector2 u = Vector2.Dot(Velocity, normal) * normal;
+            Vector2 w = Velocity - u;
+            Velocity = .9f*w - u;
+            
+            //float dot = Vector2.Dot(Velocity, normal);
+            //Velocity = -normal * dot;
+            //Velocity = .5f * (Velocity + (-2 * normal * Vector2.Dot(Velocity, normal)));         
+           // SetAcceleration(new Vector2(0,0));
         }
 
         public void SetSkin(Skin skin)
         {
             BallSkin = skin;
+        }
+
+        public void SetAcceleration(Vector2 acc)
+        {
+            Acceleration = acc;
         }
     }
 }

@@ -38,9 +38,9 @@
     <Compile Include="Ball.cs" />
     <Compile Include="CollisionDetection.cs" />
     <Compile Include="Input.cs" />
+    <Compile Include="LinePoint.cs" />
     <Compile Include="Sketcher.cs" />
     <Compile Include="Skin.cs" />
-    <Compile Include="Spring.cs" />
     <Compile Include="TheNutJobGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
