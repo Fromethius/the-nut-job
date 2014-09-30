@@ -67,53 +67,63 @@ namespace The_Nut_Job
 
                 foreach (var path in sketcher.lines)
                 {
+                    Vector2 p = origin;
+                    Vector2 p2 = circumferencePosition;
+
                     for (int i = 1; i < path.Count - 1; i++)
                     {
                         LinePoint point = path[i];
-
-                        Vector2 p = origin;
-                        Vector2 p2 = circumferencePosition;
                         Vector2 q = point.Previous.Position;
                         Vector2 q2 = point.Next.Position;
 
                         Vector2? intersectionPoint = LineSegmentIntersect(p, p2, q, q2);
-                        
-                        if(intersectionPoint.HasValue)
+
+                        if (intersectionPoint.HasValue)
                         {
                             Vector2 connecting = Vector2.Normalize(q - q2);
-                            float x = connecting.X;
-                            float y = -1* connecting.Y;
-                            ball.Bounce(new Vector2(y, x));
+                            ball.Bounce(Perpindicular(connecting));
                             ball.Update(gameTime);
                             base.Update(gameTime);
                             return;
                         }
                     }
-                    
-                    if (path.Count > 0 && path[0].Position.X == circumferencePosition.X)
+
+                    if (path.Count > 1)
                     {
-                        LinePoint startPoint = path[0];
-                        Vector2 end = startPoint.Position;
-                        Vector2 next = startPoint.Next.Position;
-                        ball.Bounce(Vector2.Normalize(end - next));
-                        Console.WriteLine("Edge Collision");
-                        ball.Update(gameTime);
-                        base.Update(gameTime);
-                        return;
+                        Vector2? startIntersect = EdgeCheck(path[0], p, p2);
+
+                        if (startIntersect.HasValue)
+                        {
+                            Console.WriteLine("Edge Collision");
+                            ball.Bounce(startIntersect.Value);
+                            ball.Update(gameTime);
+                            base.Update(gameTime);
+                            ball.Bounce(startIntersect.Value);
+                            ball.Update(gameTime);
+                            base.Update(gameTime);
+                            ball.Bounce(startIntersect.Value);
+                            ball.Update(gameTime);
+                            base.Update(gameTime);
+                            return;
+                        }
+
+                        Vector2? endIntersect = EdgeCheck(path[path.Count - 1], p, p2);
+
+                        if (endIntersect.HasValue)
+                        {
+                            Console.WriteLine("Edge Collision");
+                            ball.Bounce(endIntersect.Value);
+                            ball.Update(gameTime);
+                            base.Update(gameTime);
+                            ball.Bounce(endIntersect.Value);
+                            ball.Update(gameTime);
+                            base.Update(gameTime);
+                            ball.Bounce(endIntersect.Value);
+                            ball.Update(gameTime);
+                            base.Update(gameTime);
+                            return;
+                        }
                     }
-                    else if (path.Count > 0 && path[path.Count - 1].Position == circumferencePosition)
-                    {
-                        int count = path.Count - 1;
-                        LinePoint endPoint = path[count];
-                        Vector2 end = endPoint.Position;
-                        Vector2 next = endPoint.Next.Position;
-                        ball.Bounce(Vector2.Normalize(end - next));
-                        Console.WriteLine("Edge Collision");
-                        ball.Update(gameTime);
-                        base.Update(gameTime);
-                        return;
-                    }
-                    // New vector == -2 * (V dot N) * N + V
                 }
             }
 
@@ -135,6 +145,40 @@ namespace The_Nut_Job
             }
 
             return null; // No collision
+        }
+
+        Vector2? EdgeCheck(LinePoint edge, Vector2 origin, Vector2 circumferencePosition)
+        {
+            Vector2 edgeEnd = edge.Position;
+            Vector2 edgeNext = new Vector2(0, 0);
+            if (edge.Previous == null && edge.Next != null)
+            {
+                edgeNext = edge.Next.Position;
+            }
+            if (edge.Next == null && edge.Previous != null)
+            {
+                edgeNext = edge.Previous.Position;
+            }
+            Vector2 edgeConnecting = Vector2.Normalize(edgeEnd - edgeNext);
+            Vector2 edgePerpindicular = new Vector2(Perpindicular(edgeConnecting).X + 1, Perpindicular(edgeConnecting).Y + 1);
+
+            Vector2 edgeLineTop = edgeEnd + edgePerpindicular;
+            Vector2 edgeLineBot = edgeEnd - edgePerpindicular;
+
+            Vector2? edgeIntersection = LineSegmentIntersect(origin, circumferencePosition, edgeLineTop, edgeLineBot);
+
+            if (edgeIntersection.HasValue)
+            {
+                return edgeConnecting;
+            }
+            return null;
+        }
+
+        Vector2 Perpindicular(Vector2 original)
+        {
+            float x = original.X;
+            float y = -1 * original.Y;
+            return new Vector2(y, x);
         }
 
         protected override void Draw(GameTime gameTime)
