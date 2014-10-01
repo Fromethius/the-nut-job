@@ -57,7 +57,7 @@ namespace The_Nut_Job
         {
             Vector2 u = Vector2.Dot(Velocity, normal) * normal;
             Vector2 w = Velocity - u;
-            Velocity = .9f*w - u;
+            Velocity = w - .9f*u;
             
             //float dot = Vector2.Dot(Velocity, normal);
             //Velocity = -normal * dot;
