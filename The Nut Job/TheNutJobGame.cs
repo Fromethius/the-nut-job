@@ -123,8 +123,8 @@ namespace The_Nut_Job
 
         Vector2? LineSegmentIntersect(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3)
         {
-            Vector2 s1 = new Vector2(p1.X - p0.X, p1.Y - p0.Y);
-            Vector2 s2 = new Vector2(p3.X - p2.X, p3.Y - p2.Y);
+            Vector2 s1 = p1 - p0;
+            Vector2 s2 = p3 - p2;
 
             float s = (-s1.Y * (p0.X - p2.X) + s1.X * (p0.Y - p2.Y)) / (-s2.X * s1.Y + s1.X * s2.Y);
             float t = (s2.X * (p0.Y - p2.Y) - s2.Y * (p0.X - p2.X)) / (-s2.X * s1.Y + s1.X * s2.Y);
