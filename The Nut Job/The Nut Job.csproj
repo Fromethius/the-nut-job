@@ -36,9 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Ball.cs" />
-    <Compile Include="CollisionDetection.cs" />
+    <Compile Include="CollisionSystem.cs" />
     <Compile Include="Input.cs" />
-    <Compile Include="LinePoint.cs" />
+    <Compile Include="Path.cs" />
     <Compile Include="Sketcher.cs" />
     <Compile Include="TheNutJobGame.cs" />
     <Compile Include="Program.cs" />

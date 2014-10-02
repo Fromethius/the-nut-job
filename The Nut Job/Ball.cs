@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace The_Nut_Job
@@ -18,12 +14,13 @@ namespace The_Nut_Job
 
             Position = new Vector2(position.X, position.Y);
             Velocity = new Vector2(0, 0);
-            Acceleration = new Vector2(0, 100);
+            Acceleration = new Vector2(0, 200);
             Radius = image.Width / 2;
         }
 
         public int Radius { get; private set; }
         public Vector2 Position { get; private set; }
+        public Vector2 PositionByOrigin { get { return new Vector2(Position.X + Radius, Position.Y + Radius); } }
         public Vector2 Velocity { get; private set; }
         public Vector2 Acceleration { get; private set; }
 
@@ -62,7 +59,7 @@ namespace The_Nut_Job
             // float dot = Vector2.Dot(Velocity, normal);
             // Velocity = -normal * dot;
             // Velocity = .5f * (Velocity + (-2 * normal * Vector2.Dot(Velocity, normal)));         
-           //  SetAcceleration(new Vector2(0,0));
+            // SetAcceleration(new Vector2(0,0));
         }
     }
 }
