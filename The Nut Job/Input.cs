@@ -21,6 +21,11 @@ namespace The_Nut_Job
             return currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released;
         }
 
+        public static bool IsMouseRightClick()
+        {
+            return currentMouseState.RightButton == ButtonState.Pressed && previousMouseState.RightButton == ButtonState.Released;
+        }
+
         public static bool IsMouseLeftDown()
         {
             return currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Pressed;

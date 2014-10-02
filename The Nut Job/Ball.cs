@@ -5,42 +5,30 @@ namespace The_Nut_Job
 {
     class Ball
     {
-        private Texture2D image;
+        private readonly Texture2D image;
         private Vector2 previousPosition;
 
-        public Ball(Texture2D image, Vector2 position)
+        public Ball(Texture2D image)
         {
             this.image = image;
-
-            Position = new Vector2(position.X, position.Y);
-            Velocity = new Vector2(0, 0);
-            Acceleration = new Vector2(0, 200);
             Radius = image.Width / 2;
+            InitializeMotionVectors();
         }
 
         public int Radius { get; private set; }
-        public Vector2 Position { get; private set; }
+        public Vector2 Position { get; set; }
         public Vector2 PositionByOrigin { get { return new Vector2(Position.X + Radius, Position.Y + Radius); } }
-        public Vector2 Velocity { get; private set; }
+        public Vector2 Velocity { get; set; }
         public Vector2 Acceleration { get; private set; }
-
-        public void SetPosition(Vector2 pos)
-        {
-            Position = pos;
-        }
-
-        public void SetVelocity(Vector2 vel)
-        {
-            Velocity = vel;
-        }
 
         public void Update(GameTime gameTime)
         {
             previousPosition = Position;
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Position += dt * Velocity;
-            Velocity += dt * Acceleration;
+
+            Position += (0.5f * Acceleration * dt + Velocity) * dt;
+            Velocity += Acceleration * dt;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -52,14 +40,14 @@ namespace The_Nut_Job
         {
             Position = previousPosition;
 
-            Vector2 u = Vector2.Dot(Velocity, normal) * normal;
-            Vector2 w = Velocity - u;
-            Velocity = w - .9f * u;
-            
-            // float dot = Vector2.Dot(Velocity, normal);
-            // Velocity = -normal * dot;
-            // Velocity = .5f * (Velocity + (-2 * normal * Vector2.Dot(Velocity, normal)));         
-            // SetAcceleration(new Vector2(0,0));
+            Velocity = Vector2.Reflect(Velocity, normal) * 0.9f;
+        }
+
+        public void InitializeMotionVectors()
+        {
+            Position = new Vector2(500, 0);
+            Velocity = new Vector2(0, 0);
+            Acceleration = new Vector2(0, 200);
         }
     }
 }

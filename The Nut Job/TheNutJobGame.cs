@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace The_Nut_Job
 {
@@ -28,7 +29,7 @@ namespace The_Nut_Job
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sketcher = new Sketcher(GraphicsDevice);
-            ball = new Ball(Content.Load<Texture2D>("ball.png"), new Vector2(500, 0));
+            ball = new Ball(Content.Load<Texture2D>("ball.png"));
             collisionSystem = new CollisionSystem();
         }
 
@@ -52,7 +53,12 @@ namespace The_Nut_Job
                 sketcher.AddPoint(new Vector2(Input.MouseX, Input.MouseY));
             }
 
-            collisionSystem.Update(ball, sketcher.lines, gameTime);
+            if (Input.IsMouseRightClick())
+            {
+                ball.InitializeMotionVectors();
+            }
+
+            collisionSystem.Update(ball, sketcher.Lines, gameTime);
 
             ball.Update(gameTime);
             base.Update(gameTime);
@@ -62,8 +68,7 @@ namespace The_Nut_Job
         {
             if (ball.Position.Y > 600)
             {
-                ball.SetPosition(new Vector2(300, 0));
-                ball.SetVelocity(Vector2.Zero);
+                ball.InitializeMotionVectors();
             }
         }
 

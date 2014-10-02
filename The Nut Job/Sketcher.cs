@@ -9,36 +9,44 @@ namespace The_Nut_Job
     class Sketcher
     {
         private readonly Texture2D whitePixel;
-        public readonly Stack<Path> lines = new Stack<Path>();
+        private Vector2? previousPoint = null;
+
+        public List<Path> Lines { get; private set; }
 
         public Sketcher(GraphicsDevice graphicsDevice)
         {
             whitePixel = new Texture2D(graphicsDevice, 1, 1);
             whitePixel.SetData(new[] { Color.White });
+
+            Lines = new List<Path>();
         }
 
         public void StartNewPath()
         {
-            lines.Push(new Path());
+            previousPoint = null;
+
+            Lines.Add(new Path());
         }
 
         public void AddPoint(Vector2 point)
         {
-            if (lines.Peek().Any(c => c == point))
+            Path path = Lines.Last();
+
+            if (previousPoint.HasValue && point != previousPoint)
             {
-                return;
+                path.Add(new LineSegment(previousPoint.Value, point));
             }
 
-            lines.Peek().Add(point);
+            previousPoint = point;
         }
 
         public void DrawPaths(SpriteBatch spriteBatch)
         {
-            foreach (Path line in lines)
+            foreach (Path path in Lines)
             {
-                for (int i = 1; i < line.Count; i++)
+                foreach (LineSegment lineSegment in path)
                 {
-                    DrawLine(spriteBatch, line[i - 1], line[i]);
+                    DrawLine(spriteBatch, lineSegment.Start, lineSegment.End);
                 }
             }
         }
