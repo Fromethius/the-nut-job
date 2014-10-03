@@ -40,7 +40,12 @@ namespace The_Nut_Job
         {
             Position = previousPosition;
 
-            Velocity = Vector2.Reflect(Velocity, normal) * 0.9f;
+            Vector2 height = Vector2.Dot(Velocity, normal) * normal;
+            Vector2 roll = Velocity - height;
+            float friction = 1;
+            float elasticity = .5f;
+            Velocity = friction * roll - elasticity * height;
+            //Velocity = Vector2.Reflect(Velocity, normal) * 0.9f;
         }
 
         public void InitializeMotionVectors()
