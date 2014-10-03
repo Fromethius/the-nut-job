@@ -58,7 +58,7 @@ namespace The_Nut_Job
                 ball.InitializeMotionVectors();
             }
 
-            collisionSystem.Update(ball, sketcher.Lines, gameTime);
+            collisionSystem.Update(ball, sketcher.Paths, gameTime);
 
             ball.Update(gameTime);
             base.Update(gameTime);
