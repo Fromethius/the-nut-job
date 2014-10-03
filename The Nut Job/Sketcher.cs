@@ -11,26 +11,26 @@ namespace The_Nut_Job
         private readonly Texture2D whitePixel;
         private Vector2? previousPoint = null;
 
-        public List<Path> Lines { get; private set; }
+        public List<Path> Paths { get; private set; }
 
         public Sketcher(GraphicsDevice graphicsDevice)
         {
             whitePixel = new Texture2D(graphicsDevice, 1, 1);
             whitePixel.SetData(new[] { Color.White });
 
-            Lines = new List<Path>();
+            Paths = new List<Path>();
         }
 
         public void StartNewPath()
         {
             previousPoint = null;
 
-            Lines.Add(new Path());
+            Paths.Add(new Path());
         }
 
         public void AddPoint(Vector2 point)
         {
-            Path path = Lines.Last();
+            Path path = Paths.Last();
 
             if (previousPoint.HasValue && point != previousPoint)
             {
@@ -42,7 +42,7 @@ namespace The_Nut_Job
 
         public void DrawPaths(SpriteBatch spriteBatch)
         {
-            foreach (Path path in Lines)
+            foreach (Path path in Paths)
             {
                 foreach (LineSegment lineSegment in path)
                 {
