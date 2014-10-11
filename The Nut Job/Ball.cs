@@ -41,15 +41,16 @@ namespace The_Nut_Job
             if (revertPosition)
             {
                 Position = previousPosition;
+                //Position = Position + .25f * Vector2.Normalize(Vector2.Dot(Velocity, normal) * normal);
             }
             else 
             {
-                Position = Position - .25f*Vector2.Normalize(Vector2.Dot(Velocity, normal) * normal);
+                Position = Position - Vector2.Normalize(Vector2.Dot(Velocity, normal) * normal);
             }
             Vector2 height = Vector2.Dot(Velocity, normal) * normal;
             Vector2 roll = Velocity - height;
-            float friction = 1f;
-            float elasticity = .6f;
+            float friction = .1f;
+            float elasticity = 1.5f;
             Velocity = friction * roll - elasticity * height;
             //Velocity = Vector2.Reflect(Velocity, normal) * 0.9f;
         }
