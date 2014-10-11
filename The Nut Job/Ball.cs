@@ -42,7 +42,10 @@ namespace The_Nut_Job
             {
                 Position = previousPosition;
             }
-
+            else 
+            {
+                Position = Position - .5f*Vector2.Normalize(Vector2.Dot(Velocity, normal) * normal);
+            }
             Vector2 height = Vector2.Dot(Velocity, normal) * normal;
             Vector2 roll = Velocity - height;
             float friction = 1f;
