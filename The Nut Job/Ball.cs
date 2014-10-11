@@ -50,7 +50,7 @@ namespace The_Nut_Job
             Vector2 height = Vector2.Dot(Velocity, normal) * normal;
             Vector2 roll = Velocity - height;
             float friction = .1f;
-            float elasticity = 1.5f;
+            float elasticity = 1.1f;
             Velocity = friction * roll - elasticity * height;
             //Velocity = Vector2.Reflect(Velocity, normal) * 0.9f;
         }

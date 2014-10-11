@@ -90,6 +90,18 @@ namespace The_Nut_Job
             pan.Y += Input.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Down) ? distance : 0;
 
             camera.Pan(pan);
+
+            if (Input.DeltaWheelValue > 0 && camera.Zoom < 2)
+            {
+                camera.Zoom += .1f;
+
+                Vector2 position = camera.ScreenToUniverse(new Vector2(Input.MouseX, Input.MouseY));
+                camera.LookAt(position);
+            }
+            else if (Input.DeltaWheelValue < 0)
+            {
+                camera.Zoom -= .1f;
+            }
         }
 
         private void HandlePossibleBallFall()

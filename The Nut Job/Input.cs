@@ -35,5 +35,13 @@ namespace The_Nut_Job
         {
             return Keyboard.GetState().IsKeyDown(key);
         }
+
+        public static int DeltaWheelValue
+        {
+            get
+            {
+                return currentMouseState.ScrollWheelValue - previousMouseState.ScrollWheelValue;
+            }
+        }
     }
 }
