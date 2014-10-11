@@ -44,7 +44,7 @@ namespace The_Nut_Job
             }
             else 
             {
-                Position = Position - .5f*Vector2.Normalize(Vector2.Dot(Velocity, normal) * normal);
+                Position = Position - .25f*Vector2.Normalize(Vector2.Dot(Velocity, normal) * normal);
             }
             Vector2 height = Vector2.Dot(Velocity, normal) * normal;
             Vector2 roll = Velocity - height;
