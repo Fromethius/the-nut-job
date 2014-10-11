@@ -30,5 +30,10 @@ namespace The_Nut_Job
         {
             return currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Pressed;
         }
+
+        public static bool IsKeyDown(Keys key)
+        {
+            return Keyboard.GetState().IsKeyDown(key);
+        }
     }
 }
