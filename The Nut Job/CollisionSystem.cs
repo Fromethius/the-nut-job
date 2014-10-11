@@ -61,7 +61,7 @@ namespace The_Nut_Job
                 {
                     if (IntersectLineCircle(origin, ball.Radius, lineSegment))
                     {
-                        ball.Bounce(Perpendicular(Vector2.Normalize(lineSegment.End - lineSegment.Start)), revertPosition: false);
+                        ball.Bounce(Perpendicular(Vector2.Normalize(lineSegment.End - lineSegment.Start)), revertPosition: true);
                         return true;
                     }
                 }

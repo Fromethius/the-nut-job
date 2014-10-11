@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Ball.cs" />
+    <Compile Include="Camera.cs" />
     <Compile Include="CollisionSystem.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FPS.cs" />
