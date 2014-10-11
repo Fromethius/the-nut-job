@@ -11,6 +11,7 @@ namespace The_Nut_Job
         private Sketcher sketcher;
         private Ball ball;
         private CollisionSystem collisionSystem;
+        private FPS fps = new FPS();
 
         public TheNutJobGame()
             : base()
@@ -59,6 +60,7 @@ namespace The_Nut_Job
             }
 
             collisionSystem.Update(ball, sketcher.Paths, gameTime);
+            fps.Update(gameTime);
 
             ball.Update(gameTime);
             base.Update(gameTime);
@@ -81,6 +83,9 @@ namespace The_Nut_Job
             sketcher.DrawPaths(spriteBatch);
 
             ball.Draw(spriteBatch);
+            // fps.Draw(gameTime);
+
+            Console.WriteLine(sketcher.Paths.Count);
 
             spriteBatch.End();
 

@@ -30,7 +30,6 @@ namespace The_Nut_Job
                     if (IsInsideCircle(point, origin, ball.Radius))
                     {
                         ball.Bounce(Vector2.Normalize(point - origin));
-                        ball.Update(gameTime);
                         return true;
                     }
                 }
@@ -48,7 +47,6 @@ namespace The_Nut_Job
             t = t.Clamp(0, 1);
             Vector2 h = (ab * t + lineSegment.Start) - circleOrigin;
             return Vector2.Dot(h, h) <= (radius * radius); // h.Length <= radius
-
         }
 
         private bool HandlePossibleLineSegmentCollisions(Ball ball, List<Path> paths, GameTime gameTime)
@@ -63,8 +61,7 @@ namespace The_Nut_Job
                 {
                     if (IntersectLineCircle(origin, ball.Radius, lineSegment))
                     {
-                        ball.Bounce(Perpendicular(Vector2.Normalize(lineSegment.End - lineSegment.Start)));
-                        ball.Update(gameTime);
+                        ball.Bounce(Perpendicular(Vector2.Normalize(lineSegment.End - lineSegment.Start)), revertPosition: false);
                         return true;
                     }
                 }
