@@ -53,15 +53,11 @@ namespace The_Nut_Job
 
         private void DrawLine(SpriteBatch spriteBatch, Vector2 start, Vector2 end)
         {
-            Vector2 edge = end - start;
+            float distance = Vector2.Distance(start, end);
+            float angle = (float)Math.Atan2(end.Y - start.Y, end.X - start.X);
+            float thickness = 3.0f;
 
-            int distance = (int)edge.Length();
-            int lineWidth = 3;
-
-            Rectangle stretchLine = new Rectangle((int)start.X, (int)start.Y, distance, lineWidth);
-            float angle = (float)Math.Atan2(edge.Y, edge.X);
-
-            spriteBatch.Draw(whitePixel, stretchLine, null, Color.White, angle, Vector2.Zero, SpriteEffects.None, 0);
+            spriteBatch.Draw(whitePixel, start, null, Color.White, angle, Vector2.Zero, new Vector2(distance, thickness), SpriteEffects.None, 0);
         }
     }
 }

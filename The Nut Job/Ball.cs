@@ -36,14 +36,17 @@ namespace The_Nut_Job
             spriteBatch.Draw(image, Position, Color.White);
         }
 
-        public void Bounce(Vector2 normal)
+        public void Bounce(Vector2 normal, bool revertPosition = true)
         {
-            Position = previousPosition;
+            if (revertPosition)
+            {
+                Position = previousPosition;
+            }
 
             Vector2 height = Vector2.Dot(Velocity, normal) * normal;
             Vector2 roll = Velocity - height;
-            float friction = 1;
-            float elasticity = .5f;
+            float friction = 1f;
+            float elasticity = .6f;
             Velocity = friction * roll - elasticity * height;
             //Velocity = Vector2.Reflect(Velocity, normal) * 0.9f;
         }
